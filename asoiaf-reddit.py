@@ -87,6 +87,16 @@ class Connect(object):
 # PUBLIC FUNCTIONS
 # =============================================================================
 
+def check_spoilers(requested_book, matched_book):
+    """
+    Checks whether searching the requested book(s) will result in spoilers
+    """
+    if matched_book.lower() == "all":
+        return True
+    books = {'agot': 1, 'acok': 2, 'asos': 3, 'affc': 4, 'adwd': 5, 'all': 5}
+    return books[matched_book.lower()] >= books[requested_book.lower()]
+
+
 def parse_comment(comment, book):
     """
     Parses comment for what term to search for
@@ -117,7 +127,7 @@ def parse_comment(comment, book):
         title_match = re.search("[\(\[].*(published|spoiler.*(all|agot|acok|asos|affc|adwd)|(all|agot|acok|asos|affc|adwd).*spoiler).*[\)\]]", comment.link_title.lower())
         if title_match:
             matched_book = title_match.group(3) if title_match and title_match.group(3) is not None else title_match.group(4)
-        if title_match and matched_book.upper() == book:
+        if title_match and check_spoilers(book, matched_book):
             # INSENSITIVE
             search_brackets = re.search('"(.*?)"', original_comment)
             if search_brackets:
