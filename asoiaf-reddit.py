@@ -91,7 +91,7 @@ def check_spoilers(requested_book, matched_book):
     """
     Checks whether searching the requested book(s) will result in spoilers
     """
-    if matched_book.lower() == "all":
+    if matched_book.lower() == 'all':
         return True
     books = {'agot': 1, 'acok': 2, 'asos': 3, 'affc': 4, 'adwd': 5, 'all': 5}
     return books[matched_book.lower()] >= books[requested_book.lower()]
