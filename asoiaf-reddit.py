@@ -158,10 +158,12 @@ def parse_comment(comment, book):
         else:
             message = (
                 "######&#009;\n\n####&#009;\n\n#####&#009;\n\n"
-                ">**Sorry, fulfilling this request would be a spoiler.**\n\n"
+                ">**Sorry, fulfilling this request would be a spoiler. "
+                "Try searching in a book equal to or earlier than the "
+                "spoilers scope of this post.**\n\n"
                 "_____\n"
                 "^(I'm ASOIAFSearchBot, I will display the occurrence of your "
-                "search term throughout the books. Only currently working in Spoiler All topics.) "
+                "search term throughout the books.) "
                 "[^(More Info Here)]"
                 "(http://www.reddit.com/r/asoiaf/comments/25amke/"
                 "spoilers_all_introducing_asoiafsearchbot_command/)\n\n"
