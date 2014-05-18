@@ -122,8 +122,8 @@ def parse_comment(comment, book):
         elif (book == ADWD):
             original_comment = ''.join(original_comment.split('SearchADWD!')[1:])
 
-        # Only reply to threads with Spoiler All
-        # TODO: Expand to each book spoiler tag scope
+        # Only reply to threads where the spoiler level is greater
+        # than or equal to the requested book
         title_match = re.search("[\(\[].*(published|spoiler.*(all|agot|acok|asos|affc|adwd)|(all|agot|acok|asos|affc|adwd).*spoiler).*[\)\]]", comment.link_title.lower())
         if title_match:
             matched_book = title_match.group(3) if title_match and title_match.group(3) is not None else title_match.group(4)
