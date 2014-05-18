@@ -124,9 +124,16 @@ def parse_comment(comment, book):
 
         # Only reply to threads where the spoiler level is greater
         # than or equal to the requested book
-        title_match = re.search("[\(\[].*(published|spoiler.*(all|agot|acok|asos|affc|adwd)|(all|agot|acok|asos|affc|adwd).*spoiler).*[\)\]]", comment.link_title.lower())
+        title_match = re.search( \
+            "[\(\[].*(published|spoiler.*(all|agot|acok|asos|affc|adwd)| \
+            (all|agot|acok|asos|affc|adwd).*spoiler).*[\)\]]", \
+            comment.link_title.lower() \
+        )
         if title_match:
-            matched_book = title_match.group(2) if title_match and title_match.group(2) is not None else title_match.group(3)
+            if title_match and title_match.group(2) is not None:
+                matched_book = title_match.group(2)
+            else:
+                matched_book = title_match.group(3)
         if title_match and check_spoilers(book, matched_book):
             # INSENSITIVE
             search_brackets = re.search('"(.*?)"', original_comment)
