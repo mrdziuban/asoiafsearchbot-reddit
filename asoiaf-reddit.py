@@ -116,6 +116,8 @@ def parse_comment(comment, book):
         # TODO: Expand to each book spoiler tag scope
         title_match = re.search("[\(\[].*(published|spoiler.*(all|agot|acok|asos|affc|adwd)|(all|agot|acok|asos|affc|adwd).*spoiler).*[\)\]]", comment.link_title.lower())
         if title_match:
+            matched_book = title_match.group(3) if title_match and title_match.group(3) is not None else title_match.group(4)
+        if title_match and matched_book.upper() == book:
             # INSENSITIVE
             search_brackets = re.search('"(.*?)"', original_comment)
             if search_brackets:
