@@ -130,10 +130,13 @@ def parse_comment(comment, book):
             comment.link_title.lower() \
         )
         if title_match:
-            if title_match and title_match.group(2) is not None:
+            if title_match.group(1) == 'published':
+                matched_book = 'all'
+            elif title_match and title_match.group(2) is not None:
                 matched_book = title_match.group(2)
             else:
                 matched_book = title_match.group(3)
+
         if title_match and check_spoilers(book, matched_book):
             # INSENSITIVE
             search_brackets = re.search('"(.*?)"', original_comment)
